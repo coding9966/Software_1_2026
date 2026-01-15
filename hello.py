@@ -1,1 +1,1 @@
-print(Jack Kang is enjoying the class)
+print("Jack Kang is enjoying the class")
