@@ -1,1 +1,0 @@
-print("Jack Kang is enjoying the software class")
