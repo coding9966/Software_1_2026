@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Participants</title>
+</head>
+<body>
+
+<script>
+    const count = Number(prompt("How many participants?"));
+
+    const participants = [];
+    for (let i = 0; i < count; i++) {
+        const name = prompt(`Enter name of participant ${i + 1}:`);
+        participants.push(name);
+    }
+
+    participants.sort();
+
+    document.write("<ol>");
+    for (let i = 0; i < participants.length; i++) {
+        document.write(`<li>${participants[i]}</li>`);
+    }
+    document.write("</ol>");
+</script>
+
+</body>
+</html>

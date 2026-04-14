@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numbers</title>
+</head>
+<body>
+
+<script>
+    const numbers = [];
+
+    while (true) {
+        const input = Number(prompt("Enter a number (0 to stop):"));
+
+        if (input === 0) {
+            break; // stop asking
+        }
+
+        numbers.push(input);
+    }
+
+    // Sort from largest to smallest
+    numbers.sort((a, b) => b - a);
+
+    console.log("Numbers from largest to smallest:");
+    console.log(numbers);
+</script>
+
+</body>
+</html>

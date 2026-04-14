@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+const numbers = [];
+
+for (let i = 0; i < 5; i++) {
+    const input = Number(prompt(`Enter number ${i + 1}:`));
+    numbers.push(input);
+}
+
+console.log("Numbers in reverse order:");
+
+for (let i = numbers.length - 1; i >= 0; i--) {
+    console.log(numbers[i]);
+}
+
+</script>
+
+
+
+</body>
+</html>
