@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TV Series Search</title>
+</head>
+<body>
+
+  <h1>TV Series Search</h1>
+
+  <form id="searchForm">
+    <input id="query" name="q" type="text" placeholder="Enter TV series name">
+    <input type="submit" value="Search">
+  </form>
+
+  <div id="results"></div>
+
+  <script>
+    const form = document.getElementById("searchForm");
+    const resultsDiv = document.getElementById("results");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const value = document.getElementById("query").value.trim();
+      if (!value) return;
+
+      const url = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(value)}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // Clear old results
+        resultsDiv.innerHTML = "";
+
+        data.forEach(item => {
+          const show = item.show;
+
+          // Create article
+          const article = document.createElement("article");
+
+          // Title
+          const title = document.createElement("h2");
+          title.textContent = show.name;
+          article.appendChild(title);
+
+          // URL link
+          const link = document.createElement("a");
+          link.href = show.url;
+          link.target = "_blank";
+          link.textContent = "Show details";
+          article.appendChild(link);
+
+          // Image
+          const img = document.createElement("img");
+          img.src = show.image?.medium || "";
+          img.alt = show.name;
+          article.appendChild(img);
+
+          // Summary (already contains <p> tags)
+          const summaryDiv = document.createElement("div");
+          summaryDiv.innerHTML = show.summary || "No summary available.";
+          article.appendChild(summaryDiv);
+
+          // Add article to results
+          resultsDiv.appendChild(article);
+        });
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TV Series Search</title>
+</head>
+<body>
+
+  <h1>TV Series Search</h1>
+
+  <form id="searchForm">
+    <input id="query" name="q" type="text" placeholder="Enter TV series name">
+    <input type="submit" value="Search">
+  </form>
+
+  <script>
+    const form = document.getElementById("searchForm");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault(); // Stop page reload
+
+      const value = document.getElementById("query").value.trim();
+
+      if (!value) {
+        console.log("Please enter a search term.");
+        return;
+      }
+
+      const url = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(value)}`;
+
+      try {
+        const response = await fetch(url);
+        const results = await response.json();
+
+        console.clear();
+        console.log("Search results for:", value);
+        console.log("--------------------------------");
+
+        if (results.length === 0) {
+          console.log("No results found.");
+          return;
+        }
+
+        results.forEach(item => {
+          const show = item.show;
+          console.log("Title:", show.name);
+          console.log("Language:", show.language);
+          console.log("Genres:", show.genres.join(", "));
+          console.log("Status:", show.status);
+          console.log("Premiered:", show.premiered);
+          console.log("Official Site:", show.officialSite);
+          console.log("Summary:", show.summary?.replace(/<[^>]+>/g, ""));
+          console.log("--------------------------------");
+        });
+
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
+    });
+  </script>
+
+</body>
+</html>
